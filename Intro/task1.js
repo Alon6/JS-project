@@ -1,34 +1,31 @@
-var fs = require("fs")
+import fs from "fs"
+import winston from "winston"
+import fileData from "task1input.json" assert { type: 'json' };
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.simple(),
+    defaultMeta: { service: 'user-service' },
+    transports: [
+      //
+      // - Write all logs with importance level of `error` or less to `error.log`
+      // - Write all logs with importance level of `info` or less to `combined.log`
+      //
+      new winston.transports.File({ filename: 'error.log', level: 'error' }),
+      new winston.transports.File({ filename: 'combined.log' }),
+    ],
+  });
 function create_files(files_data){
-    for (spec of files_data){
-        fs.appendFile(spec.fileName + "." + spec.fileType, spec.fileData.toString(), function (err) {
+    for (var spec of files_data){
+        fs.writeFile(spec.fileName + "." + spec.fileType, spec.fileData.toString(), function (err) {
             if (err) throw err
-            console.log('Saved!')
+            logger.info('Saved!')
           });
     }
 }
 
 function main(){
-    const fileData = [
-        {
-            fileName: "number",
-            fileType: "txt",
-            fileData: 122
-        },
-        {
-            fileName: "func",
-            fileType: "js",
-            fileData: "console.log('Hello World!')"
-        },
-        {
-            fileName: "design",
-            fileType: "css",
-            fileData: ""
-        }
-    ]
     create_files(fileData);
 }
 
-if (require.main === module) {
-    main();
-  }
+main();
+  
