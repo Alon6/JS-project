@@ -33,6 +33,6 @@ function main() {
     console.log(array.reduce(count,0))
   }
   
-  if (require.main === module) {
-    main();
-  }
+
+main();
+  

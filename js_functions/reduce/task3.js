@@ -8,6 +8,6 @@ function main() {
     console.log(array.reduce(flat,[]))
   }
   
-  if (require.main === module) {
-    main();
-  }
+
+main();
+  
