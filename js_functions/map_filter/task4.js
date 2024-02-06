@@ -1,5 +1,5 @@
-function main() {
-    array = [
+const main = () => {
+    const array = [
         {
             name: "Person1",
             age: 30
@@ -21,11 +21,11 @@ function main() {
             age: 33
         },
     ]
-    new_array = array.filter(function(value){
-        return value.age >= 25 && value.age <= 35
+    const new_array = array.filter(({age}) => {
+        return age >= 25 && age <= 35
     })
-    console.log(new_array.map(function(value){
-        return value.name
+    console.log(new_array.map(({name}) => {
+        return name
     }))
   }
   

@@ -1,9 +1,9 @@
-function main() {
-    array = [0, 9, 15, 1, -5, 4]
-    new_array = array.filter(function(value){
+const main = () => {
+    const array = [0, 9, 15, 1, -5, 4]
+    const new_array = array.filter((value) => {
         return value > 0
     })
-    console.log(new_array.map(function(value){
+    console.log(new_array.map((value) => {
         return value ** 2
     }))
   }

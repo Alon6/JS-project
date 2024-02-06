@@ -1,5 +1,5 @@
-function main() {
-    array = [
+const main = () => {
+    const array = [
         {
             name: "name1",
             age: 10
@@ -17,9 +17,9 @@ function main() {
             age: 40
         }
     ]
-    console.log(array.map(function(value){
+    console.log(array.map((value) => {
         return {
-            label: value.name + " - " + value.age + " years old"
+            label: `${value.name} - ${value.age} years old`
         }
     }))
   }

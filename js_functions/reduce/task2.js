@@ -1,8 +1,8 @@
-function sum(total, value){
+const sum = (total, value) => {
     return total + value.price
 }
-function main() {
-    array = [
+const main = () => {
+    const array = [
         {
             title: "Tesla",
             price: 90000

@@ -1,5 +1,5 @@
-function main() {
-    array = [
+const main = () => {
+    const array = [
         {
             name: "name1",
             category: "a"
@@ -25,8 +25,8 @@ function main() {
             category: "c"
         }
     ]
-    console.log(array.filter(function(value){
-        return value.category == "b"
+    console.log(array.filter((value) => {
+        return value.category === "b"
     }))
   }
   

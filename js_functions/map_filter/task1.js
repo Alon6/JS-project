@@ -1,5 +1,5 @@
-function main() {
-    array = [
+const main = () => {
+    const array = [
         {
             name: "Product1",
             price: 50
@@ -21,13 +21,13 @@ function main() {
             price: 10
         },
     ]
-    new_array = array.filter(function(value){
-        return value.price > 50
+    const new_array = array.filter(({price}) => {
+        return price > 50
     })
-    console.log(new_array.map(function(value){
+    console.log(new_array.map(({name, price}) => {
         return {
-            name: value.name,
-            price: value.price * 0.85
+            name: name,
+            price: price * 0.85
         }
     }))
   }

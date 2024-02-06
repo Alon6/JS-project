@@ -1,9 +1,9 @@
-function count(total, value){
+const count = (total, value) => {
     if (value.voted) total++
     return total
 }
-function main() {
-    array = [
+const main = () => {
+    const array = [
         {
             name: "Person1",
             age: 30,
