@@ -16,7 +16,7 @@ const find_winner = (winner, [candidate,votes]) => {
     return winner
 }
 const main = () => {
-    const array = [
+    const input = [
         {
             name: "Bob",
             age: 30,
@@ -90,7 +90,7 @@ const main = () => {
             candidate: ""
         },
     ]
-    const res = array.reduce(calc_votes,new Map())
+    const res = input.reduce(calc_votes,new Map())
     const [...res_arr] = res.entries()
     console.log(res_arr.reduce(find_winner,"|0").split("|")[0])
   }

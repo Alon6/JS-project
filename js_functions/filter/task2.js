@@ -1,5 +1,5 @@
 const main = () => {
-    const array = [
+    const input = [
         {
             name: "name1",
             category: "a"
@@ -25,7 +25,7 @@ const main = () => {
             category: "c"
         }
     ]
-    console.log(array.filter((value) => {
+    console.log(input.filter((value) => {
         return value.category === "b"
     }))
   }

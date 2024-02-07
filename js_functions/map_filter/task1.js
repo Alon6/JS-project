@@ -1,5 +1,5 @@
 const main = () => {
-    const array = [
+    const input = [
         {
             name: "Product1",
             price: 50
@@ -21,7 +21,7 @@ const main = () => {
             price: 10
         },
     ]
-    const new_array = array.filter(({price}) => {
+    const new_array = input.filter(({price}) => {
         return price > 50
     })
     console.log(new_array.map(({name, price}) => {

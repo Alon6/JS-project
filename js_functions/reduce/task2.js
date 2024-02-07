@@ -2,7 +2,7 @@ const sum = (total, value) => {
     return total + value.price
 }
 const main = () => {
-    const array = [
+    const input = [
         {
             title: "Tesla",
             price: 90000
@@ -24,7 +24,7 @@ const main = () => {
             price: 90000
         },
     ]
-    console.log(array.reduce(sum,0))
+    console.log(input.reduce(sum,0))
   }
   
 

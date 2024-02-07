@@ -3,7 +3,7 @@ const count = (total, value) => {
     return total
 }
 const main = () => {
-    const array = [
+    const input = [
         {
             name: "Person1",
             age: 30,
@@ -30,7 +30,7 @@ const main = () => {
             voted: true
         },
     ]
-    console.log(array.reduce(count,0))
+    console.log(input.reduce(count,0))
   }
   
 

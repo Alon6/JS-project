@@ -19,7 +19,7 @@ const summarize = (total, {age, voted}) => {
     return total
 }
 const main = () => {
-    const array = [
+    const input = [
         {
             name: "Bob",
             age: 30,
@@ -81,7 +81,7 @@ const main = () => {
             voted: false
         },
     ]
-    console.log(array.reduce(summarize,
+    console.log(input.reduce(summarize,
         {
             twenties_voters: 0,
             twenties_voters_count: 0,
