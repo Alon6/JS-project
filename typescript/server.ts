@@ -37,18 +37,18 @@ app.post('/',body("name").notEmpty(), body("name").isAlphanumeric(), body("pass"
         let pass : string = req.body.pass
         if (map.has(user)){
             if (map.get(user) == pass){
-                logger.info("Right password: " + pass + " for user " + user)
-                res.send("Right password: " + pass + "  for user " + user)
+                logger.info(`Right password: ${pass} for user ${user}`)
+                res.send(`Right password: ${pass} for user ${user}`)
             } 
             else{
-              logger.info("Wrong password: " + pass + "  for user " + user)
-              res.send("Wrong password: " + pass + "  for user " + user)
+              logger.info(`Wrong password: ${pass} for user ${user}`)
+              res.send(`Wrong password: ${pass} for user ${user}`)
             }       
         }
         else {
             map.set(user, pass)
-            logger.info("User " + user + " created with password " + pass)
-            res.send("User " + user + " created with password " + pass)
+            logger.info(`User ${user} created with password ${pass}`)
+            res.send(`User ${user} created with password ${pass}`)
         }
     }
     else{
