@@ -1,10 +1,10 @@
-const getRndInteger = (min, max) => {
-    return Math.floor(Math.random() * (max - min) ) + min;
-  }
+import { getRndInteger } from "../utils.js"
+import { getLogger } from "../utils.js"
+const logger = getLogger(process.cwd(),"task2")
   const get_promise = () => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-           let num = getRndInteger(50, 101)
+           let num = getRndInteger(50, 100)
            if (num > 85) reject(`Number ${num} is too big`) 
            resolve(num)
         }, 3000)
@@ -12,20 +12,12 @@ const getRndInteger = (min, max) => {
   }
 const main = () => {
     let prom = get_promise()
-    let next_prom = prom.then(
-        (num) => {return num}
+      prom.then(
+        (num) => {logger.info(num)}
       )
       .catch(
-        (error) => {return error}
-      )
-    
-    next_prom.then((num) => {
-        console.log(num)
-        })
-        .catch((num) => {
-            console.log(num)
-        })
-    
+        (error) => {logger.error(error)}
+      )   
 }
 
 main()

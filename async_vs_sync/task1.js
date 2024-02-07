@@ -1,14 +1,13 @@
-const getRndInteger = (min, max) => {
-    return Math.floor(Math.random() * (max - min) ) + min;
-  }
-
-get_promise = async () => {
-    let prom = new Promise((resolve) => {
+import { getRndInteger } from "../utils.js"
+import { getLogger } from "../utils.js"
+const logger = getLogger(process.cwd(),"task1")
+const get_promise = async () => {
+    const prom = new Promise((resolve) => {
         setTimeout(() => {
-            resolve(getRndInteger(1,11))
+            resolve(getRndInteger(1,10))
         }, 3000)
     })
-    console.log(await prom)
+    logger.info(await prom)
 }
 
 const main = () => {

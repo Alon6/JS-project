@@ -1,12 +1,13 @@
+import { getLogger } from "../utils.js"
+const logger = getLogger(process.cwd(),"task3")
 const get_promise = async (num) => {
-    let prom = new Promise((resolve) => {
+    const prom = new Promise((resolve) => {
         setTimeout(() => {
-            let sum = 0
-            for (let i = 1; i <= num; i++) sum += i
+            const sum = [...Array(num).keys()].reduce((total, value) => total + value + 1)
             resolve(sum)
         }, 5000)
     })
-    console.log(await prom)
+    logger.info(await prom)
 }
 
 const main = () => {

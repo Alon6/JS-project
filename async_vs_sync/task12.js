@@ -1,17 +1,5 @@
-import winston from "winston"
-const logger = winston.createLogger({
-    level: 'info',
-    format: winston.format.simple(),
-    defaultMeta: { service: 'user-service' },
-    transports: [
-      //
-      // - Write all logs with importance level of `error` or less to `error.log`
-      // - Write all logs with importance level of `info` or less to `combined.log`
-      //
-      new winston.transports.File({ filename: 'error.log', level: 'error' }),
-      new winston.transports.File({ filename: 'combined.log' }),
-    ],
-  });
+import { getLogger } from "../utils.js"
+const logger = getLogger(process.cwd(),"task12")
 
 const get_promise = (val) => {
     return new Promise((resolve) => {
@@ -21,11 +9,7 @@ const get_promise = (val) => {
       })
   }
 const promise_min = (arr) => {
-    let prom_arr = []
-    for (let val of arr){
-        prom_arr.push(get_promise(val))
-
-    }
+    const prom_arr = arr.map((value) => get_promise(value))
     Promise.race(prom_arr).then((val) => {
         logger.info(val)
     })

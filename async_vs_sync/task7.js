@@ -1,25 +1,26 @@
-const getRndInteger = (min, max) => {
-    return Math.floor(Math.random() * (max - min) ) + min;
-  }
-
-  const get_promise = async () => {
-    let prom = new Promise((resolve) => {
+import { getRndInteger } from "../utils.js"
+import { getLogger } from "../utils.js"
+const logger = getLogger(process.cwd(),"task7")
+const get_first_promise = async () => {
+    const prom = new Promise((resolve) => {
         setTimeout(() => {
-            resolve()
+            resolve(get_second_promise())
         }, 5000)
     })
-    await prom
-    console.log("next promise")
-    prom = new Promise((resolve) => {
+    return await prom
+}
+const get_second_promise = async () => {
+    logger.info("next promise")
+    const prom = new Promise((resolve) => {
         setTimeout(() => {
-            resolve(getRndInteger(1,101))
+            resolve(getRndInteger(1,100))
         }, 10000)
     })
-    console.log(await prom)
+    logger.info(await prom)
 }
 
 const main = () => {
-    get_promise()
+    get_first_promise()
 }
 
 main()

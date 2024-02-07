@@ -1,27 +1,12 @@
-import winston from "winston"
-const logger = winston.createLogger({
-    level: 'info',
-    format: winston.format.simple(),
-    defaultMeta: { service: 'user-service' },
-    transports: [
-      //
-      // - Write all logs with importance level of `error` or less to `error.log`
-      // - Write all logs with importance level of `info` or less to `combined.log`
-      //
-      new winston.transports.File({ filename: 'error.log', level: 'error' }),
-      new winston.transports.File({ filename: 'combined.log' }),
-    ],
-  });
-const print_val = (val) => {
-    logger.info(val)
-}
+import { getLogger } from "../utils.js"
+const logger = getLogger(process.cwd(),"task13")
 const activate_intervals = async (arr) => {
-    let prom_arr = []
+    const prom_arr = []
     for (let val of arr){
-        let interval = setInterval(() => {
-            print_val(val)
+        const interval = setInterval(() => {
+            logger.info(val)
         },1500)
-        let prom = new Promise((resolve) => {
+        const prom = new Promise((resolve) => {
             setTimeout(() => {
                 resolve()
             }, 30000)
