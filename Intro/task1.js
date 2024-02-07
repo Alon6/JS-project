@@ -14,7 +14,7 @@ const logger = winston.createLogger({
       new winston.transports.File({ filename: 'combined.log' }),
     ],
   });
-function create_files(files_data){
+const create_files = (files_data) => {
     for (var spec of files_data){
         fs.writeFile(spec.fileName + "." + spec.fileType, spec.fileData.toString(), function (err) {
             if (err) throw err
@@ -23,7 +23,7 @@ function create_files(files_data){
     }
 }
 
-function main(){
+const main = () => {
     create_files(fileData);
 }
 

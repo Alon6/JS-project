@@ -1,3 +1,4 @@
+import { error } from "console";
 import fs from "fs"
 import winston from "winston"
 const logger = winston.createLogger({
@@ -13,57 +14,63 @@ const logger = winston.createLogger({
       new winston.transports.File({ filename: 'combined.log' }),
     ],
   });
-function main(){
-    fs.readFile("txt.txt", "utf-8", function(err, data) {
-        if (err) throw err
-        lines = data.split("\n")
-        for (line of lines) {
+const main = () => {
+    fs.readFile("txt.txt", "utf-8", (err, data) => {
+        if (err) {
+            logger.error(`Error: ${error.message}`)
+            throw err
+        } 
+        const lines = data.split("\n")
+        for (let line of lines) {
             let res = ""
-            parts = line.split("|")
-            let case_type = parts[0]
-            let text = parts[1]
-            words = text.split(" ")
-            switch(case_type){
-                case "camelCase":
+            const parts = line.split("|")
+            const case_type = parts[0]
+            const text = parts[1]
+            const words = text.split(" ")
+            const handler = {
+                "camelCase": () => {
                     res = words[0].toLowerCase()
                     for (let i = 1; i < words.length; i++){
                         res += words[i][0].toUpperCase() + words[i].slice(1).toLowerCase()
                     }
-                    break
-                case "pascalCase":
+                },
+                "pascalCase": () => {
                     for (let i = 0; i < words.length; i++){
                         res += words[i][0].toUpperCase() + words[i].slice(1).toLowerCase()
                     }
-                    break
-                case "kebabCase":
+                }, 
+                "kebabCase": () => {
                     res = words[0].toLowerCase()
                     for (let i = 1; i < words.length; i++){
                         res += "-" + words[i].toLowerCase()
                     }
-                    break
-                case "snakeCase":
+                },      
+                "snakeCase": () => {
                     res = words[0].toLowerCase()
                     for (let i = 1; i < words.length; i++){
                         res += "_" + words[i].toLowerCase()
                     }
-                    break
-                case "constantCase":
+                },      
+                "constantCase": () => {
                     res = words[0].toUpperCase()
                     for (let i = 1; i < words.length; i++){
                         res += "_" + words[i].toUpperCase()
                     }
-                    break
-                case "pathCase":
+                },
+                "pathCase": () => {
                     res = words[0][0].toUpperCase() + words[0].slice(1).toLowerCase()
                     for (let i = 1; i < words.length; i++){
                         res += "/" + words[i].toLowerCase()
                     }
-                    break
-                
+                }
             }
+            handler[case_type]()
             fs.appendFile(case_type + ".txt", res, function (err) {
-                if (err) throw err
-                winston.log("Saved!")
+                if (err){
+                    logger.error(`Error: ${error.message}`)
+                    throw err
+                } 
+                logger.info("Saved!")
             });
         }
     })
