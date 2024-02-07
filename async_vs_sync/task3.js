@@ -1,10 +1,6 @@
-function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min) ) + min;
-  }
-
-async function get_promise(num){
-    let prom = new Promise(function(resolve){
-        setTimeout(function(){
+const get_promise = async (num) => {
+    let prom = new Promise((resolve) => {
+        setTimeout(() => {
             let sum = 0
             for (let i = 1; i <= num; i++) sum += i
             resolve(sum)
@@ -13,7 +9,7 @@ async function get_promise(num){
     console.log(await prom)
 }
 
-function main(){
+const main = () => {
     get_promise(8)
 }
 

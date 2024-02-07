@@ -1,16 +1,16 @@
 
-  function get_promise(){
-    return new Promise(function(reject){
+const get_promise = () => {
+    return new Promise((reject) => {
         reject("FAILED") 
   })
 }
-function main(){
+const main = () => {
     let prom = get_promise()
     let next_prom = prom.catch(
-        function(error) {return error}
+        (error) => {return error}
       )
     next_prom.then(
-        function(error) {console.log(error)}
+        (error) => {console.log(error)}
     )
 }
 

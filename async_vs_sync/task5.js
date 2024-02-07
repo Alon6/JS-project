@@ -1,12 +1,12 @@
-function getRndInteger(min, max) {
+const getRndInteger = (min, max) => {
     return Math.floor(Math.random() * (max - min) ) + min;
   }
 
-async function create_promises(num){
+create_promises = async (num) => {
     let promises = []
     for (let i = 0; i < num; i++){
-        promises.push(new Promise(function(resolve){
-            setTimeout(function(){
+        promises.push(new Promise((resolve) => {
+            setTimeout(() => {
                 resolve("Resolved")
             }, getRndInteger(1,5) * 1000)
         }))
@@ -16,7 +16,7 @@ async function create_promises(num){
     }
 }
 
-function main(){
+const main = () => {
     create_promises(6)
 }
 

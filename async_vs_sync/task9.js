@@ -1,10 +1,10 @@
-function hello() {
+const hello = () => {
     console.log("Hello World")
   }
-async function activate_interval(){
+activate_interval = async () => {
     let interval = setInterval(hello,1000)
-    let prom = new Promise(function(resolve){
-        setTimeout(function(){
+    let prom = new Promise((resolve) => {
+        setTimeout(() => {
             resolve()
         }, 10000)
     })
@@ -12,7 +12,7 @@ async function activate_interval(){
     clearInterval(interval)
 }
 
-function main(){
+const main = () => {
     activate_interval()
 }
 main()

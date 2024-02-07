@@ -13,28 +13,28 @@ const logger = winston.createLogger({
     ],
   });
   
-function getRndInteger(min, max) {
+const getRndInteger = (min, max) => {
     return Math.floor(Math.random() * (max - min) ) + min;
-  }
-function and_promises(promise1, promise2){
+}
+const and_promises = (promise1, promise2) => {
     prom_arr = []
     prom_arr.push(promise1)
     prom_arr.push(promise2)
-    Promise.all(prom_arr).then(function(){
+    Promise.all(prom_arr).then(() => {
         logger.info("HUGE success")
     })
-    .catch(function(){
+    .catch(() => {
         logger.error("Error")
     })
 }
   
-function main(){
-    promise1 = new Promise(function(resolve,reject){
+const main = () => {
+    promise1 = new Promise((resolve,reject) => {
         let num = getRndInteger(1,3)
         if (num == 1) resolve()
         reject()
       })
-      promise2 = new Promise(function(resolve,reject){
+      promise2 = new Promise((resolve,reject) => {
         let num = getRndInteger(1,3)
         if (num == 1) resolve()
         reject()

@@ -13,25 +13,25 @@ const logger = winston.createLogger({
     ],
   });
 
-function get_promise(val){
-    return new Promise(function(resolve){
-        setTimeout(function(){
+const get_promise = (val) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
             resolve(val)
         }, val * 1000)
       })
   }
-function promise_min(arr){
+const promise_min = (arr) => {
     let prom_arr = []
     for (let val of arr){
         prom_arr.push(get_promise(val))
 
     }
-    Promise.race(prom_arr).then(function(val){
+    Promise.race(prom_arr).then((val) => {
         logger.info(val)
     })
 }
   
-function main(){
+const main = () => {
     promise_min([3,7,10,2,10,4,5])
 }
 

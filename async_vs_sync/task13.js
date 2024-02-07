@@ -12,17 +12,17 @@ const logger = winston.createLogger({
       new winston.transports.File({ filename: 'combined.log' }),
     ],
   });
-function print_val(val) {
+const print_val = (val) => {
     logger.info(val)
 }
-async function activate_intervals(arr){
+const activate_intervals = async (arr) => {
     let prom_arr = []
     for (let val of arr){
-        let interval = setInterval(function(){
+        let interval = setInterval(() => {
             print_val(val)
         },1500)
-        let prom = new Promise(function(resolve){
-            setTimeout(function(){
+        let prom = new Promise((resolve) => {
+            setTimeout(() => {
                 resolve()
             }, 30000)
         })
@@ -33,7 +33,7 @@ async function activate_intervals(arr){
         clearInterval(prom[1])
     }
 }
-function main(){
+const main = () => {
     activate_intervals([1,2,3,4,5])
 }
 main()

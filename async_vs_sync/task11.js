@@ -13,10 +13,10 @@ const logger = winston.createLogger({
     ],
   });
   
-function getRndInteger(min, max) {
+const getRndInteger = (min, max) => {
     return Math.floor(Math.random() * (max - min) ) + min;
-  }
-async function or_promises(promise1, promise2){
+}
+const or_promises = async (promise1, promise2) => {
   try{  
     let prom_arr = []
     prom_arr.push(promise1)
@@ -29,14 +29,14 @@ async function or_promises(promise1, promise2){
   }
 }
   
-function main(){
+const main = () => {
   let num = 0
-    let promise1 = new Promise(function(resolve,reject){
+    let promise1 = new Promise((resolve,reject) => {
         num = getRndInteger(1,3)
         if (num == 1) resolve()
         reject()
       })
-    let promise2 = new Promise(function(resolve,reject){
+    let promise2 = new Promise((resolve,reject) => {
         num = getRndInteger(1,3)
         if (num == 1) resolve()
         reject()

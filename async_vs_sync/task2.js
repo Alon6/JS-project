@@ -1,28 +1,28 @@
-function getRndInteger(min, max) {
+const getRndInteger = (min, max) => {
     return Math.floor(Math.random() * (max - min) ) + min;
   }
-  function get_promise(){
-    return new Promise(function(resolve, reject){
-        setTimeout(function(){
+  const get_promise = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
            let num = getRndInteger(50, 101)
-           if (num > 85) reject("Number " + num + " is too big") 
+           if (num > 85) reject(`Number ${num} is too big`) 
            resolve(num)
         }, 3000)
       })
   }
-function main(){
+const main = () => {
     let prom = get_promise()
     let next_prom = prom.then(
-        function(num) {return num}
+        (num) => {return num}
       )
       .catch(
-        function(error) {return error}
+        (error) => {return error}
       )
     
-    next_prom.then(function(num){
+    next_prom.then((num) => {
         console.log(num)
         })
-        .catch(function(num){
+        .catch((num) => {
             console.log(num)
         })
     
