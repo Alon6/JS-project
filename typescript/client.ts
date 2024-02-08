@@ -1,23 +1,11 @@
 import axios, { AxiosResponse } from "axios";
-import winston from "winston"
-const logger = winston.createLogger({
-    level: 'info',
-    format: winston.format.simple(),
-    defaultMeta: { service: 'user-service' },
-    transports: [
-      //
-      // - Write all logs with importance level of `error` or less to `error.log`
-      // - Write all logs with importance level of `info` or less to `combined.log`
-      //
-      new winston.transports.File({ filename: 'client_error.log', level: 'error' }),
-      new winston.transports.File({ filename: 'client_combined.log' }),
-    ],
-  });
+import { getLogger } from "../utils.js"
+const logger = getLogger(process.cwd(),"client")
 const check_pass = async (name : string, pass : string) => {
     try {
       logger.info(`Sending name: ${name}, password: ${pass}`)
       const response : AxiosResponse<string> = await axios.post<string>(
-        "http://localhost:3000/",
+        "http://localhost:3000/checkPassword",
         { name: name, pass: pass },
       );
       logger.info(response.data)

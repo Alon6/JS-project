@@ -1,25 +1,13 @@
 import express, { Request, Response, query } from 'express'
 import { body } from "express-validator"
 import { validationResult } from "express-validator"
-import winston from "winston"
-const logger = winston.createLogger({
-    level: 'info',
-    format: winston.format.simple(),
-    defaultMeta: { service: 'user-service' },
-    transports: [
-      //
-      // - Write all logs with importance level of `error` or less to `error.log`
-      // - Write all logs with importance level of `info` or less to `combined.log`
-      //
-      new winston.transports.File({ filename: 'server_error.log', level: 'error' }),
-      new winston.transports.File({ filename: 'server_combined.log' }),
-    ],
-  });
+import { getLogger } from "../utils.js"
+const logger = getLogger(process.cwd(),"server")
 const app = express();
 const port = 3000;
 const map : Map<string,string> = new Map()
 
-let server = app.listen(port, () => {
+const server = app.listen(port, () => {
     logger.info(`Server running at http://localhost:${port}`);
   });
 app.use(express.json());
@@ -28,22 +16,25 @@ app.get("/closeServer", (req: Request, res: Response) => {
   res.send("Got It")
   server.close()
 })
-app.post('/',body("name").notEmpty(), body("name").isAlphanumeric(), body("pass").notEmpty(), (req: Request, res: Response) => {
-  logger.info("Got request")  
+app.post('/checkPassword',body("name").notEmpty(), body("name").isAlphanumeric(), body("pass").notEmpty(), (req: Request, res: Response) => {
+  logger.info("Got request from client, checking validation")  
   const errors = validationResult(req)
     if (errors.isEmpty()) {
         res.status(200)
-        let user : string = req.body.name
-        let pass : string = req.body.pass
+        const user : string = req.body.name
+        const pass : string = req.body.pass
+        const handler = {
+          [pass] : () => {
+            logger.info(`Right password: ${pass} for user ${user}`)
+            res.send(`Right password: ${pass} for user ${user}`)
+          },
+          "default" : () => {
+            logger.info(`Wrong password: ${pass} for user ${user}`)
+            res.send(`Wrong password: ${pass} for user ${user}`)
+          }
+        }
         if (map.has(user)){
-            if (map.get(user) == pass){
-                logger.info(`Right password: ${pass} for user ${user}`)
-                res.send(`Right password: ${pass} for user ${user}`)
-            } 
-            else{
-              logger.info(`Wrong password: ${pass} for user ${user}`)
-              res.send(`Wrong password: ${pass} for user ${user}`)
-            }       
+            (handler[map.get(user)!] || handler["default"])()     
         }
         else {
             map.set(user, pass)
