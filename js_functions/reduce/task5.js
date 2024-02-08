@@ -1,20 +1,25 @@
+import { getLogger } from "../../utils.js"
+const logger = getLogger(process.cwd(),"task5")
 const summarize = (total, {age, voted}) => {
-    if (age >= 18){
-        if (age <= 25){
-            total.twenties_voters++
-            if (voted)
-            total.twenties_voters_count++
-        }
-        else if (age <= 35){
-            total.thirties_voters++
-            if (voted)
-            total.thirties_voters_count++
-        }
-        else if (age <= 55){
+    if (age >= 18 && age <= 55){
+        const forties = () => {
             total.forties_voters++
-            if (voted)
-            total.forties_voters_count++
+            total.forties_voters_count += voted ? 1 : 0
         }
+        const age_range = {            
+            '2' : () => {
+                total.twenties_voters++
+                total.twenties_voters_count += voted ? 1 : 0
+            },
+            '3' : () => {
+                total.thirties_voters++
+                total.thirties_voters_count += voted ? 1 : 0
+            },
+            '4' : forties,
+            '5' : forties
+        }
+        const range = Math.round(age / 10 - 0.1).toString()
+        age_range[range]()
     }
     return total
 }
@@ -81,7 +86,7 @@ const main = () => {
             voted: false
         },
     ]
-    console.log(input.reduce(summarize,
+    const res = (input.reduce(summarize,
         {
             twenties_voters: 0,
             twenties_voters_count: 0,
@@ -91,6 +96,9 @@ const main = () => {
             forties_voters_count: 0
         }
         ))
+    logger.info(`twenties: ${res.twenties_voters}, voters: ${res.twenties_voters_count}`)
+    logger.info(`thirties: ${res.thirties_voters}, voters: ${res.thirties_voters_count}`)
+    logger.info(`forties: ${res.forties_voters}, voters: ${res.forties_voters_count}`)
   }
   
 

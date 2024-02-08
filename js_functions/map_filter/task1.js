@@ -1,3 +1,5 @@
+import { getLogger } from "../../utils.js"
+const logger = getLogger(process.cwd(),"task1")
 const main = () => {
     const input = [
         {
@@ -21,15 +23,7 @@ const main = () => {
             price: 10
         },
     ]
-    const new_array = input.filter(({price}) => {
-        return price > 50
-    })
-    console.log(new_array.map(({name, price}) => {
-        return {
-            name: name,
-            price: price * 0.85
-        }
-    }))
+    logger.info(input.filter(({price}) => price > 50).map(({price}) => price * 0.85 ))
   }
 
 main();

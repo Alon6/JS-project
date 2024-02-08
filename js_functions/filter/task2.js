@@ -1,3 +1,5 @@
+import { getLogger } from "../../utils.js"
+const logger = getLogger(process.cwd(),"task2")
 const main = () => {
     const input = [
         {
@@ -25,9 +27,7 @@ const main = () => {
             category: "c"
         }
     ]
-    console.log(input.filter((value) => {
-        return value.category === "b"
-    }))
+    logger.info(input.filter((value) => value.category === "b"))
   }
   
 main();

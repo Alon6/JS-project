@@ -1,20 +1,10 @@
-const calc_votes = (total, {voted,candidate}) => {
-    if (voted){
-        if (total.has(candidate)){
-            total.set(candidate,total.get(candidate) + 1)
-        }
-        else {
-            total.set(candidate,1)
-        }
-    }
+import { getLogger } from "../../utils.js"
+const logger = getLogger(process.cwd(),"task4")
+const calc_votes = (total, {candidate}) => {
+    total.set(candidate, 1 + (total.has(candidate) ? total.get(candidate) : 0))
     return total
 }
-const find_winner = (winner, [candidate,votes]) => {
-    const parts = winner.split("|")
-    if (votes > parts[1])
-        winner = `${candidate}|${votes}`
-    return winner
-}
+const find_winner = (winner, res) => res[1] > winner[1] ? res : winner
 const main = () => {
     const input = [
         {
@@ -91,8 +81,9 @@ const main = () => {
         },
     ]
     const res = input.reduce(calc_votes,new Map())
+    res.delete("")
     const [...res_arr] = res.entries()
-    console.log(res_arr.reduce(find_winner,"|0").split("|")[0])
+    logger.info(res_arr.reduce(find_winner,["", 0])[0])
   }
   
 

@@ -1,6 +1,6 @@
-const sum = (total, value) => {
-    return total + value.price
-}
+import { getLogger } from "../../utils.js"
+const logger = getLogger(process.cwd(),"task2")
+const sum = (total, value) => total + value.price
 const main = () => {
     const input = [
         {
@@ -24,7 +24,7 @@ const main = () => {
             price: 90000
         },
     ]
-    console.log(input.reduce(sum,0))
+    logger.info(input.reduce(sum,0))
   }
   
 

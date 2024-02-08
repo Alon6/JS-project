@@ -1,3 +1,5 @@
+import { getLogger } from "../../utils.js"
+const logger = getLogger(process.cwd(),"task4")
 const main = () => {
     const input = [
         {
@@ -21,12 +23,7 @@ const main = () => {
             age: 33
         },
     ]
-    const new_array = input.filter(({age}) => {
-        return age >= 25 && age <= 35
-    })
-    console.log(new_array.map(({name}) => {
-        return name
-    }))
+    logger.info(input.filter(({age}) => age >= 25 && age <= 35).map(({name}) => name))
   }
   
 

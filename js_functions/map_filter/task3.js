@@ -1,11 +1,8 @@
+import { getLogger } from "../../utils.js"
+const logger = getLogger(process.cwd(),"task3")
 const main = () => {
     const input = ["a","b","d","a","c","b"]
-    const new_array = input.filter((value,index,array) => {
-        return array.indexOf(value) == index
-    })
-    console.log(new_array.map((value) => {
-        return value.toUpperCase()
-    }))
+    logger.info(input.filter((value) => input.indexOf(value) == input.lastIndexOf(value)).map((value) => value.toUpperCase()))
   }
   
 

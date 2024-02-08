@@ -1,3 +1,5 @@
+import { getLogger } from "../../utils.js"
+const logger = getLogger(process.cwd(),"task3")
 const main = () => {
     const input = [
         {
@@ -17,7 +19,7 @@ const main = () => {
             age: 40
         }
     ]
-    console.log(input.map((value) => {
+    logger.info(input.map((value) => {
         return {
             label: `${value.name} - ${value.age} years old`
         }

@@ -1,11 +1,8 @@
+import { getLogger } from "../../utils.js"
+const logger = getLogger(process.cwd(),"task5")
 const main = () => {
     const input = [0, 9, 15, 1, -5, 4]
-    const new_array = input.filter((value) => {
-        return value > 0
-    })
-    console.log(new_array.map((value) => {
-        return value ** 2
-    }))
+    logger.info(input.filter((value) => value > 0).map((value) => value ** 2))
   }
   
 
